@@ -5,27 +5,27 @@
 #include "svdpi.h"
 #include "print.h"
 
-static inline void print(unsigned char data,int bit,char c) {
+static inline void prt(unsigned char data,int bit,char c) {
   if(data&(1<<bit)) putchar(c);
   else putchar(' ');
 }
 
 static inline void printu(unsigned char data, int b1, int b2, int b3)
 {
-  print(data,b1,'|') ;
-  print(data,b2,'_') ;
-  print(data,b3,'|') ;
+  prt(data,b1,'|') ;
+  prt(data,b2,'_') ;
+  prt(data,b3,'|') ;
 
 }
 
 void printd(unsigned char data){
   printf("\x1b[C");
-  print(data,0,'_');
+  prt(data,0,'_');
   printf("\x1b[B\x1b[2D");
   printu(data,5,6,1);
   printf("\x1b[B\x1b[3D");
   printu(data,4,3,2);
-  print(data,7,'.');
+  prt(data,7,'.');
 }
 
 void print(char sg, char sel) {
